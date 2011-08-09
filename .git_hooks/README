@@ -1,0 +1,12 @@
+= Overview =
+
+.git_hooks/ replaces .git/hooks/ so that hooks may be tracked as part of the repository.
+
+= Setup =
+
+  ./bin/setup
+
+= TODO =
+
+* Implement git-ignored personal hooks directory
+* Add useful hooks
