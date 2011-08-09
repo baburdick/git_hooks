@@ -1,0 +1,2 @@
+# Ignore preserved old .git/hooks directory:
+/.old_git_hooks

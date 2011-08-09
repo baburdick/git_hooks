@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# One-time setup (per repo) of .git_hooks as a tracked set of git hooks.
+
+dot_git_path="../.git"
+hooks_path="../.git/hooks"
+old_hooks_dir=".old_git_hooks"
+old_hooks_path="../$old_hooks_dir"
+tracked_hooks_dir=".git_hooks"
+tracked_hooks_path="../$tracked_hooks_dir"
+
+if [ ! -e $dot_git_path ] ; then
+  echo "Can't find $dot_git_path/. "
+  echo "You must run ./bin/setup from $tracked_hooks_dir/ in the root of your checkout."
+  exit 1
+fi
+
+if [ -h $hooks_path ] ; then
+  echo "$hooks_path is a symlink. Nothing to do."
+else
+  if [ -d $hooks_path ] ; then
+    echo "$hooks_path is a directory." \
+         "Replacing with a symlink to $tracked_hooks_path."
+
+    invocation_dir=`pwd`
+    mv $hooks_path $old_hooks_path && \
+    cd `dirname $hooks_path` && \
+    ln -s $tracked_hooks_path hooks && \
+    cd $invocation_dir
+
+    echo "Old $hooks_path moved to $old_hooks_path." \
+         "Delete it or harvest your hooks to $tracked_hooks_dir/."
+  else
+    echo "$hooks_path is neither a symlink nor a directory. Can't proceed."
+    exit 1
+  fi
+fi
+
+exit 0
