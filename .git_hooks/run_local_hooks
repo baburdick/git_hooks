@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Source this script in a hook to allow a local hook.
+
+# source: https://gist.github.com/357538
+# author: https://github.com/mpdaugherty
+# ref: http://blog.mpdaugherty.com/2010/04/06/how-to-include-git-hooks-in-a-repository-and-still-personalize-your-machine/
+
+# Check if the local environment has its own hook:
+CMD_NAME=`basename -- $0`
+if [ -f $GIT_DIR/hooks/local/$CMD_NAME ]
+then
+  # If so, run it. $@ passes all the command line arguments passed to this function
+  # If the local hook fails, fail this one as well
+  if ! $GIT_DIR/hooks/local/$CMD_NAME $@
+  then
+    echo "User hook '$CMD_NAME' failed"
+    XIT=1
+  fi
+fi
+
+XIT=0
+
+if [ "$BASH_SOURCE" = "$0" ] ; then
+  #echo "Called directly. Exiting with status."
+  exit $XIT
+fi

@@ -1,2 +1,6 @@
 # Ignore preserved old .git/hooks directory:
 /.old_git_hooks
+
+# Ignore local git hooks:
+/.git_hooks/local/*
+!/.git_hooks/local/README

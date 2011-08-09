@@ -1,6 +1,6 @@
 = Overview =
 
-.git_hooks/ replaces .git/hooks/ so that hooks may be tracked as part of the repository.
+.git_hooks/ replaces .git/hooks/ so that hooks may be tracked as part of the repository. Create local untracked hooks in .git_hooks/local/ and source run_local_hooks in each hook script to run the local hook.
 
 = Setup =
 
@@ -8,5 +8,4 @@
 
 = TODO =
 
-* Implement git-ignored personal hooks directory
 * Add useful hooks
