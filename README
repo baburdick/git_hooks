@@ -1,0 +1,3 @@
+Allows hooks to be tracked as part of a repository by replacing .git/hooks/ with .git_hooks/. Create local untracked hooks in .git_hooks/local/, and source run_local_hooks in each hook script to run the local hook.
+
+See .git_hooks/README for more.
